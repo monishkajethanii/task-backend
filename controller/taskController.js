@@ -9,7 +9,7 @@ const getTasks = async (req, res) => {
     return res.status(200).json({ data });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -26,7 +26,7 @@ const addTask = async (req, res) => {
     console.log("data inserted successfully", data);
     return res.status(200).json({ message: "data inserted successfully" });
   } catch (error) {
-    console.error(error.message);
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -60,7 +60,7 @@ const editTask = async (req, res) => {
     });
   } catch (error) {
     console.error(error.message);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -80,11 +80,11 @@ const deleteTask = async (req, res) => {
     // check if existing
     const { data, error } = await supabase.from("tasks").delete().eq("id", id);
     if (error) {
-      return res.status(404).json({ error: "internal server error" });
+      return res.status(500).json({ error: "internal server error" });
     }
     return res.status(200).json({ message: "task deleted successfully" });
   } catch (error) {
-    console.error(error.message);
+    return res.status(500).json({ error: error.message });
   }
 };
 
