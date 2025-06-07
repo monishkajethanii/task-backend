@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-  origin: "https://task-frontend-seven.vercel.app",
+  origin: "https://blog-frontend-inky-two.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
@@ -35,3 +35,4 @@ app.use(authCheck);
 app.listen(5000, () => {
   console.log('server started at port 5000');
 });
+module.exports = app
